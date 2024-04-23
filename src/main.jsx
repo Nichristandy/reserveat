@@ -4,17 +4,22 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Import Pages
-import App from "./App.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import Admin from "./pages/admin.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <HomePage />,
   },
   {
-    path: "/home",
-    element: <HomePage />,
+    path: "/admin",
+    element: <Admin />,
+  },
+  {
+    path: "/admin/dashboard-home",
+    element: <Dashboard />,
   },
 ]);
 
