@@ -6,7 +6,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //Import Pages
 import HomePage from "./pages/HomePage.jsx";
 import Admin from "./pages/admin.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import Reservasi from "./pages/Dashboard/Reservasi.jsx";
+import User from "./pages/Dashboard/User.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/dashboard-home",
     element: <Dashboard />,
+  },
+  {
+    path: "/admin/dashboard-reservasi",
+    element: <Reservasi />,
+  },
+  {
+    path: "/admin/dashboard-user",
+    element: <User />,
   },
 ]);
 
