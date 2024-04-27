@@ -1,4 +1,6 @@
+*
 /* Home Hero */
+
 
 .home-main{
   padding: 2rem;
@@ -24,7 +26,7 @@
 }
 
 .home-hero a {
-  background-color: #B6231D;
+  background-color: #b6231d;
   padding: 10px;
   border-radius: 20px;
   -webkit-border-radius: 20px;
@@ -43,18 +45,18 @@
 }
 
 /* Home Body */
-.home-body div{
+.home-body div {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
 
-.home-body h2{
+.home-body h2 {
   font-size: 24px;
   font-weight: bold;
 }
 
-.home-body .first{
+.home-body .first {
   /* background-color: rebeccapurple; */
   height: 10vh;
   display: flex;
@@ -72,7 +74,7 @@
   -o-border-radius: 10px;
 }
 
-.home-body .second p{
+.home-body .second p {
   /* background-color: rebeccapurple; */
   height: 7vh;
   width: 48%;
@@ -96,7 +98,7 @@
   display: flex;
   flex-direction: column;
 }
-.home-menu p{
+.home-menu p {
   /* background-color: rebeccapurple; */
   padding: 20px;
   width: 100%;
@@ -108,4 +110,3 @@
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-

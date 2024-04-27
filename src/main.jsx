@@ -4,19 +4,33 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Import Pages
-import App from "./App.jsx";
 import HomePage from "./pages/HomePage.jsx";
-
+import Admin from "./pages/admin.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import Reservasi from "./pages/Dashboard/Reservasi.jsx";
+import User from "./pages/Dashboard/User.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <HomePage />,
   },
   {
-    path: "/home",
-    element:<HomePage />,
-  }
+    path: "/admin",
+    element: <Admin />,
+  },
+  {
+    path: "/admin/dashboard-home",
+    element: <Dashboard />,
+  },
+  {
+    path: "/admin/dashboard-reservasi",
+    element: <Reservasi />,
+  },
+  {
+    path: "/admin/dashboard-user",
+    element: <User />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
