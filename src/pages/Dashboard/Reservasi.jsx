@@ -1,6 +1,16 @@
 import SideBar from "../../component/SideBar";
-
+import Table from "../../component/Table";
+import { useState } from "react";
 const Reservasi = () => {
+  const indoorSeat = [6, 6, 2, 6, 2, 2, 2, 6, 6, 2];
+  const outdoorSeat = [6, 2, 6, 2, 2, 2, 6, 2, 6, 6];
+  const [room, setRoom] = useState("");
+
+  const handleRoomChange = (e) => {
+    setRoom(e.target.value);
+    console.log(room);
+  };
+
   return (
     <>
       {" "}
@@ -11,50 +21,45 @@ const Reservasi = () => {
         <div className="w-full grid grid-cols-10 gap-8 py-8 pl-5">
           <div className="col-span-5">
             <div className="flex flex-row gap-5 items-center">
-              <span className="text-2xl font-bold">hour:</span>{" "}
-              <button className="bg-grey rounded-xl text-black uppercase px-2 py-1 font-bold text-2xl">
-                17:00
-              </button>
+              <span className="text-2xl font-bold">Hour:</span>{" "}
+              <input
+                type="time"
+                className="bg-grey rounded-xl text-black uppercase px-2 py-1 text-2xl focus:outline-none"
+              ></input>
+            </div>
+            <div className="flex flex-row gap-5 items-center mt-5">
+              <span className="text-2xl font-bold">Date:</span>{" "}
+              <input
+                type="date"
+                className="bg-grey rounded-xl text-black px-2 py-1 focus:outline-none  text-xl"
+              ></input>
             </div>
             <div className=" mt-14 flex flex-row gap-8">
-              <button className="bg-grey rounded-xl text-black  px-2 py-1 font-bold text-2xl">
-                Indoor
-              </button>
-              <button className="bg-grey rounded-xl text-black  px-2 py-1 text-2xl">
-                Outdoor
-              </button>
+              <input
+                type="button"
+                value={"Indoor"}
+                className={`bg-grey rounded-xl text-black  px-2 py-1 ${
+                  room == "Indoor" ? "font-bold" : "font-normal"
+                } text-2xl cursor-pointer`}
+                onClick={handleRoomChange}
+              ></input>
+              <input
+                type="button"
+                value={"Outdoor"}
+                className={`bg-grey rounded-xl text-black ${
+                  room == "Outdoor" ? "font-bold" : "font-normal"
+                }  px-2 py-1 text-2xl cursor-pointer`}
+                onClick={handleRoomChange}
+              ></input>
             </div>
             <div className="w-full grid grid-cols-5 gap-5 mt-10">
-              <div className="col-span-2 bg-grey rounded-xl h-28 text-xl font-bold items-center justify-center flex">
-                6
-              </div>
-              <div className="col-span-2 bg-grey rounded-xl text-xl font-bold items-center justify-center flex">
-                6
-              </div>
-              <div className="col-span-1 bg-grey rounded-xl text-xl font-bold items-center justify-center flex">
-                2
-              </div>
-              <div className="col-span-2 bg-grey rounded-xl h-28 text-xl font-bold items-center justify-center flex">
-                6
-              </div>
-              <div className="col-span-1 bg-grey rounded-xl text-xl font-bold items-center justify-center flex">
-                2
-              </div>
-              <div className="col-span-1 bg-grey rounded-xl text-xl font-bold items-center justify-center flex">
-                2
-              </div>
-              <div className="col-span-1 bg-grey rounded-xl text-xl font-bold items-center justify-center flex">
-                2
-              </div>
-              <div className="col-span-2 bg-grey rounded-xl h-28 text-xl font-bold items-center justify-center flex">
-                6
-              </div>
-              <div className="col-span-2 bg-grey rounded-xl text-xl font-bold items-center justify-center flex">
-                6
-              </div>
-              <div className="col-span-1 bg-grey rounded-xl text-xl font-bold items-center justify-center flex">
-                2
-              </div>
+              {room == "Indoor"
+                ? indoorSeat.map((seat, id) => (
+                    <Table key={id} seatNumber={seat} />
+                  ))
+                : outdoorSeat.map((seat, id) => (
+                    <Table key={id} seatNumber={seat} />
+                  ))}
             </div>
           </div>
           <div className="col-span-5">
