@@ -3,6 +3,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import UserBar from "../../component/UserBar";
 const User = () => {
   const users = ["John doe", "Mary Jane", "Doe John", "Jane Mary"];
+
   return (
     <>
       {" "}

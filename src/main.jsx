@@ -9,6 +9,7 @@ import Admin from "./pages/admin.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Reservasi from "./pages/Dashboard/Reservasi.jsx";
 import User from "./pages/Dashboard/User.jsx";
+import Reserve from "./pages/Reserve.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/dashboard-user",
     element: <User />,
+  },
+  {
+    path: "/reservasi",
+    element: <Reserve />,
   },
 ]);
 
