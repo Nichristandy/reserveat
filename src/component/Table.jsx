@@ -1,22 +1,26 @@
-const Table = ({ seatNumber, status }) => {
+import { useState } from "react";
+
+const Table = ({ seatNumber, status, openModal }) => {
   return (
     <>
       {seatNumber == 6 ? (
-        <div
+        <button
           className={`col-span-2 ${
             status == true ? "bg-grey" : "bg-red text-white"
           } rounded-xl h-28 text-xl font-bold items-center justify-center flex`}
+          onClick={openModal}
         >
           6
-        </div>
+        </button>
       ) : (
-        <div
+        <button
           className={`col-span-1 ${
             status == true ? "bg-grey" : "bg-red text-white"
           } rounded-xl text-xl font-bold items-center justify-center flex`}
+          onClick={openModal}
         >
           2
-        </div>
+        </button>
       )}
     </>
   );
