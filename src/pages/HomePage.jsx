@@ -7,9 +7,9 @@ const Home = () => {
       <SearchBar />
       <section className="home-hero">
         <img src="/HomeAssets/couple-enjoying-food-restaurant.jpg" alt="" />
+        <h2>Reserve Your Place</h2>
         <p>
           {" "}
-          <h2>Reserve Your Place</h2>
           easy way to reserve your place without
           <br />
           waiting at the waiting line and waiting for the food
@@ -21,9 +21,9 @@ const Home = () => {
       <section className="home-body">
         <div>
           <h2>Top Restaurant</h2>
-          <a href="#">See More </a>
+          <a href="/seemore">See More </a>
         </div>
-        <p className="first">Lorem Ipsum</p>
+        <a href="/reservasi" className="first">Lorem Ipsum</a>
         <div className="second">
           <p>Lorem Ipsum</p>
           <p>Lorem Ipsum</p>
