@@ -10,7 +10,7 @@ const SeeMore = () => {
 
   return (
     <div className="allcontainer">
-      <Navbar />
+      <Navbar to={"/"} />
       <div className="seemore-container">
         <section className="seemore-grid">
           <div className="grid-big">
@@ -31,9 +31,7 @@ const SeeMore = () => {
         </section>
 
         <section>
-          <h1>
-            ALL RESTAURANT
-          </h1>
+          <h1>ALL RESTAURANT</h1>
           <div className="list">
             <img src="/SeemoreAssets/burger_rio.jpg" alt="" />
             <a href="">Burger Rio</a>
