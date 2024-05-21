@@ -1,7 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { MdOutlineArrowBack } from "react-icons/md";
+import { MdOutlineArrowBack, MdOutlineMenu } from "react-icons/md";
+import { useState } from "react";
 
 const Navbar = ({ to }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleIsOpen = () => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  };
+
   return (
     <>
       {" "}
@@ -16,7 +23,15 @@ const Navbar = ({ to }) => {
         <button className="bg-red hidden md:flex rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl">
           LOGIN
         </button>
+        <button className="flex md:hidden" onClick={handleIsOpen}>
+          <MdOutlineMenu size={32} />
+        </button>
       </div>
+      {isOpen && (
+        <div className="w-full py-4 flex justify-center items-center bg-red rounded-xl font-bold text-white">
+          Reschedule
+        </div>
+      )}
     </>
   );
 };
