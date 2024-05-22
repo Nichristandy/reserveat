@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen w-full flex  bg-grey pr-8">
       <div className="w-2/12 h-full">
-        <SideBar />
+        <SideBar role="admin" />
       </div>
       <div className="w-full grid grid-cols-10 gap-5 py-8 pl-5 overflow-y-scroll h-screen">
         <div className="col-span-7 bg-white rounded-xl p-8 flex items-center justify-center">

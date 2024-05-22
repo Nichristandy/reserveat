@@ -11,6 +11,7 @@ import Reservasi from "./pages/Dashboard/Reservasi.jsx";
 import User from "./pages/Dashboard/User.jsx";
 import Reserve from "./pages/Reserve.jsx";
 import SeeMore from "./pages/SeeMore.jsx";
+import Cashier from "./pages/cashier.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,14 +37,15 @@ const router = createBrowserRouter([
   {
     path: "/reservasi",
     element: <Reserve />,
-  },{
+  },
+  {
     path: "/seemore",
     element: <SeeMore />,
   },
+  { path: "/admin/cashier", element: <Cashier /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
