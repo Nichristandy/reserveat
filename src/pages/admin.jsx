@@ -3,13 +3,19 @@ import { useNavigate } from "react-router-dom";
 const Admin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleIsAdmin = (e) => {
+    setIsAdmin(e.target.checked);
+    console.log(isAdmin);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (email == "admin@gmail.com" && password == "admin123") {
+    if (email == "admin@gmail.com" && password == "admin123" && isAdmin) {
       alert("logged in");
       navigate("/admin/dashboard-home");
     } else {
@@ -52,6 +58,15 @@ const Admin = () => {
               ></input>
             </div>
           </div>
+          <div className="px-6 flex flex-row gap-2">
+            <input
+              type="checkbox"
+              checked={isAdmin}
+              onChange={handleIsAdmin}
+            ></input>
+            <span>Log in as admin</span>
+          </div>
+
           <div className="mt-8 flex flex-row py-4 px-6 justify-between items-end">
             <button
               type="submit"

@@ -9,7 +9,7 @@ const User = () => {
       {" "}
       <div className="min-h-screen w-full flex  bg-white pr-8">
         <div className="w-2/12">
-          <SideBar />
+          <SideBar role="admin" />
         </div>
         <div className="w-full flex flex-col gap-10 py-8 pl-5">
           <div className="bg-grey flex flex-row justify-between items-center gap-2 rounded-xl w-5/12 px-2 py-1">

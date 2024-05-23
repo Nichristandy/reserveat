@@ -1,7 +1,7 @@
-import SideBar from "../../component/SideBar";
-import Table from "../../component/Table";
+import SideBar from "../component/SideBar";
+import Table from "../component/Table";
 import { useState } from "react";
-const Reservasi = () => {
+const Cashier = () => {
   const indoorSeat = [6, 6, 2, 6, 2, 2, 2, 6, 6, 2];
   const outdoorSeat = [6, 2, 6, 2, 2, 2, 6, 2, 6, 6];
   const [room, setRoom] = useState("");
@@ -10,13 +10,12 @@ const Reservasi = () => {
     setRoom(e.target.value);
     console.log(room);
   };
-
   return (
     <>
       {" "}
       <div className="min-h-screen w-full flex  bg-white pr-8">
         <div className="w-2/12">
-          <SideBar role="admin" />
+          <SideBar />
         </div>
         <div className="w-full grid grid-cols-10 gap-8 py-8 pl-5">
           <div className="col-span-5">
@@ -98,4 +97,4 @@ const Reservasi = () => {
   );
 };
 
-export default Reservasi;
+export default Cashier;

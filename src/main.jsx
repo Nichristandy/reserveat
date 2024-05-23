@@ -12,6 +12,7 @@ import User from "./pages/Dashboard/User.jsx";
 import Reserve from "./pages/Reserve.jsx";
 import SeeMore from "./pages/SeeMore.jsx";
 import History from "./pages/History.jsx";
+import Cashier from "./pages/cashier.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
     path: "/history",
     element: <History />,
   },
+  { path: "/admin/cashier", element: <Cashier /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
