@@ -15,7 +15,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-2">
-          <NavLink to="#">
+          <NavLink to="/history">
             <button className="bg-red hidden md:flex rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl ">
               History
             </button>
