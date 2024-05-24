@@ -12,6 +12,8 @@ import User from "./pages/Dashboard/User.jsx";
 import Reserve from "./pages/Reserve.jsx";
 import SeeMore from "./pages/SeeMore.jsx";
 import Cashier from "./pages/cashier.jsx";
+import DashboardCashier from "./pages/Dashboard/Cashier.jsx";
+import Menu from "./pages/Menu.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,8 @@ const router = createBrowserRouter([
     element: <SeeMore />,
   },
   { path: "/admin/cashier", element: <Cashier /> },
+  { path: "/admin/dashboard-cashier", element: <DashboardCashier /> },
+  { path: "/menu", element: <Menu /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
