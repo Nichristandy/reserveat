@@ -2,18 +2,15 @@
 /* Home Hero */
 
 
-.home-main{
+.home-main {
   padding: 2rem;
 }
 
 .home-hero {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: start;
   height: min-content;
   margin-bottom: 30px;
-  /* background-color: rebeccapurple; */
 }
 
 .home-hero h2 {

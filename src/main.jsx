@@ -11,6 +11,7 @@ import Reservasi from "./pages/Dashboard/Reservasi.jsx";
 import User from "./pages/Dashboard/User.jsx";
 import Reserve from "./pages/Reserve.jsx";
 import SeeMore from "./pages/SeeMore.jsx";
+import History from "./pages/History.jsx";
 import Cashier from "./pages/cashier.jsx";
 import DashboardCashier from "./pages/Dashboard/Cashier.jsx";
 import Menu from "./pages/Menu.jsx";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/seemore",
     element: <SeeMore />,
+  },
+  {
+    path: "/history",
+    element: <History />,
   },
   { path: "/admin/cashier", element: <Cashier /> },
   { path: "/admin/dashboard-cashier", element: <DashboardCashier /> },

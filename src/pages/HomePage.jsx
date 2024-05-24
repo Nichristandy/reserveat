@@ -1,9 +1,11 @@
 import "../css/HomePage.css";
+import Navbar from "../component/Navbar";
 import SearchBar from "../component/searchBar";
 
 const Home = () => {
   return (
     <div className="home-main">
+      <Navbar />
       <SearchBar />
       <section className="home-hero">
         <img src="/HomeAssets/couple-enjoying-food-restaurant.jpg" alt="" />
