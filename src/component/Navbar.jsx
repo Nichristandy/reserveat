@@ -33,9 +33,6 @@ const Navbar = ({ to }) => {
             </button>
           </NavLink>
         </div>
-        <button className="bg-red hidden md:flex rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl">
-          LOGIN
-        </button>
         <button className="flex md:hidden" onClick={handleIsOpen}>
           <MdOutlineMenu size={32} />
         </button>

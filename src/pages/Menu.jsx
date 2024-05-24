@@ -59,7 +59,18 @@ const Menu = () => {
             onClick={handleRoomChange}
           ></input>
         </div>
-        <div className="mt-10"></div>
+        <div className="mt-10 grid grid-cols-12">
+          <div className=" col-span-2 flex flex-col gap-5">
+            <img
+              className="w-full rounded-lg"
+              src="https://placehold.co/199x202/png"
+            ></img>
+            <span className="font-bold text-2xl">Lorem Ipsum</span>
+            <span className=" text-lg">
+              description lorem ipsum doloris amet alknejdj
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
