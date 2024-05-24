@@ -1,8 +1,9 @@
+import Menus from "../component/Menus";
 import Navbar from "../component/Navbar";
 import { useState } from "react";
 const Menu = () => {
   const [room, setRoom] = useState("");
-
+  const menus = [1, 2, 3, 4, 5, 6];
   const handleRoomChange = (e) => {
     setRoom(e.target.value);
     console.log(room);
@@ -17,7 +18,7 @@ const Menu = () => {
           <span className="font-medium text-2xl">Choose your food</span>
         </div>
         {/* filter table */}
-        <div className=" mt-14 flex flex-row gap-8">
+        <div className=" mt-14 flex flex-row gap-5 md:gap-8">
           <input
             type="button"
             value={"All"}
@@ -59,18 +60,16 @@ const Menu = () => {
             onClick={handleRoomChange}
           ></input>
         </div>
-        <div className="mt-10 grid grid-cols-12">
-          <div className=" col-span-2 flex flex-col gap-5">
-            <img
-              className="w-full rounded-lg"
-              src="https://placehold.co/199x202/png"
-            ></img>
-            <span className="font-bold text-2xl">Lorem Ipsum</span>
-            <span className=" text-lg">
-              description lorem ipsum doloris amet alknejdj
-            </span>
-          </div>
+        <div className="mt-10 grid grid-cols-4 gap-5 md:grid-cols-12">
+          {menus.map((menu) => (
+            <Menus key={menu} />
+          ))}
         </div>
+      </div>
+      <div className="flex justify-end mt-16">
+        <button className="bg-red text-white text-2xl font-medium uppercase w-4/12 py-2 rounded-xl">
+          Place Order
+        </button>
       </div>
     </div>
   );
