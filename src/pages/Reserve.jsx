@@ -1,40 +1,74 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "../component/Table";
-import { MdOutlineArrowBack } from "react-icons/md";
 import Modal from "../component/Modal";
-import { NavLink } from "react-router-dom";
 import Navbar from "../component/Navbar";
-const reserve = () => {
-  const tables = [
-    { tableName: "A", seatNumber: 6, status: true },
-    { tableName: "B", seatNumber: 6, status: true },
-    { tableName: "C", seatNumber: 2, status: true },
-    { tableName: "D", seatNumber: 6, status: false },
-    { tableName: "E", seatNumber: 2, status: true },
-    { tableName: "F", seatNumber: 2, status: true },
-    { tableName: "G", seatNumber: 2, status: false },
-    { tableName: "H", seatNumber: 6, status: true },
-    { tableName: "I", seatNumber: 6, status: true },
-    { tableName: "J", seatNumber: 2, status: true },
-  ];
+import { fetchTables } from "../DatabaseDummy/api";
 
+const reserve = () => {
   const [showModal, setShowModal] = useState(false);
-  const [table, setTable] = useState(null);
+  const [tables, setTables] = useState([]);
+  const [room, setRoom] = useState("");
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [selectedTable, setSelectedTable] = useState([]);
+  const [filteredTables, setFilteredTables] = useState([]);
+  const [unFilteredTables, setUnFilteredTables] = useState([]);
+  const [refresh, setRefresh] = useState(false); // Initialize refresh state
+
+  useEffect(() => {
+    const loadTables = async () => {
+      const data = await fetchTables();
+      setTables(data);
+      setUnFilteredTables(data);
+    };
+    loadTables();
+  }, [tables]);
+
+  useEffect(() => {
+    if (date && time && room) {
+      const filtered = unFilteredTables.filter(
+        (table) =>
+          table.room.toLowerCase() === room.toLowerCase() &&
+          (!table.date || table.date !== date || table.time !== time)
+      );
+      setFilteredTables(filtered);
+    } else {
+      setFilteredTables(unFilteredTables);
+    }
+  }, [date, time, room, unFilteredTables]);
+
   const openModal = (e) => {
     setShowModal(true);
-    setTable(e);
+    setSelectedTable(e);
   };
 
   const closeModal = () => {
     setShowModal(false);
-    setTable(null);
+    setSelectedTable(null);
   };
-
-  const [room, setRoom] = useState("");
 
   const handleRoomChange = (e) => {
     setRoom(e.target.value);
     console.log(room);
+  };
+
+  const bookTable = () => {
+    // Update the tables state to mark the selected table as booked
+    const updatedTables = tables.map((table) =>
+      table.tableName === selectedTable.tableName
+        ? { ...table, status: false, date, time }
+        : table
+    );
+    setTables(updatedTables);
+
+    // Update filteredTables as well
+    const updatedFilteredTables = filteredTables.map((table) =>
+      table.tableName === selectedTable.tableName
+        ? { ...table, status: false, date, time }
+        : table
+    );
+    setFilteredTables(updatedFilteredTables);
+    closeModal();
   };
 
   return (
@@ -56,6 +90,7 @@ const reserve = () => {
                 <input
                   type="time"
                   className="bg-grey rounded-xl text-black uppercase px-2 py-1 text-2xl focus:outline-none"
+                  onChange={(e) => setTime(e.target.value)}
                 ></input>
               </div>
               <div className="flex flex-row gap-5 items-center">
@@ -63,6 +98,7 @@ const reserve = () => {
                 <input
                   type="date"
                   className="bg-grey rounded-xl text-black px-2 py-1 focus:outline-none  text-xl"
+                  onChange={(e) => setDate(e.target.value)}
                 ></input>
               </div>
             </div>
@@ -87,7 +123,7 @@ const reserve = () => {
             </div>
             {/* mapping table component */}
             <div className="w-full grid grid-cols-5 gap-5 mt-10 pb-5 md:pb-10">
-              {tables.map((table) => (
+              {filteredTables.map((table) => (
                 <Table
                   key={table.tableName}
                   tableName={table.tableName}
@@ -122,8 +158,11 @@ const reserve = () => {
       {showModal ? (
         <Modal
           closeModal={closeModal}
-          tableName={table.tableName}
-          seatNumber={table.seatNumber}
+          tableName={selectedTable.tableName}
+          seatNumber={selectedTable.seatNumber}
+          date={date}
+          time={time}
+          bookTable={bookTable}
         />
       ) : (
         ""
