@@ -1,6 +1,7 @@
 import Menus from "../component/Menus";
 import Navbar from "../component/Navbar";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Menu = () => {
   const [room, setRoom] = useState("");
   const menus = [1, 2, 3, 4, 5, 6];
@@ -18,7 +19,7 @@ const Menu = () => {
           <span className="font-medium text-2xl">Choose your food</span>
         </div>
         {/* filter table */}
-        <div className=" mt-14 flex flex-row gap-5 md:gap-8">
+        <div className=" mt-14 overflow-x-scroll no-scrollbar flex flex-row gap-5 md:gap-8">
           <input
             type="button"
             value={"All"}
@@ -60,16 +61,19 @@ const Menu = () => {
             onClick={handleRoomChange}
           ></input>
         </div>
-        <div className="mt-10 grid grid-cols-4 gap-5 md:grid-cols-12">
+        <div className="mt-10 grid no-scrollbar overflow-y-scroll grid-cols-4 gap-8 md:gap-5 md:grid-cols-12">
           {menus.map((menu) => (
             <Menus key={menu} />
           ))}
         </div>
       </div>
       <div className="flex justify-end mt-16">
-        <button className="bg-red text-white text-2xl font-medium uppercase w-4/12 py-2 rounded-xl">
+        <Link
+          to={"/payment"}
+          className="bg-red text-white text-2xl font-medium uppercase w-full md:w-4/12 py-2 rounded-xl"
+        >
           Place Order
-        </button>
+        </Link>
       </div>
     </div>
   );

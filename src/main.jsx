@@ -15,6 +15,7 @@ import History from "./pages/History.jsx";
 import Cashier from "./pages/cashier.jsx";
 import DashboardCashier from "./pages/Dashboard/Cashier.jsx";
 import Menu from "./pages/Menu.jsx";
+import Payment from "./pages/Payment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
   { path: "/admin/cashier", element: <Cashier /> },
   { path: "/admin/dashboard-cashier", element: <DashboardCashier /> },
   { path: "/menu", element: <Menu /> },
+  { path: "/payment", element: <Payment /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
