@@ -16,6 +16,7 @@ import Cashier from "./pages/cashier.jsx";
 import DashboardCashier from "./pages/Dashboard/Cashier.jsx";
 import Menu from "./pages/Menu.jsx";
 import Payment from "./pages/Payment.jsx";
+import AllMenu from "./pages/AllMenu.jsx";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/seemore",
     element: <SeeMore />,
+  },
+  {
+    path: "/allmenu",
+    element: <AllMenu />,
   },
   {
     path: "/history",

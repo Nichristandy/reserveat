@@ -69,9 +69,10 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  color: white;
 }
 
-.home-body .second p {
+.home-body .second a {
   /* background-color: rebeccapurple; */
   height: 7vh;
   width: 48%;
@@ -89,6 +90,7 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  color: white;
 }
 
 .home-menu {
@@ -106,4 +108,105 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+
+@media (min-width: 840px) {
+  .home-hero {
+    display: flex;
+    flex-direction: row;
+    height: min-content;
+    margin-bottom: 30px;
+    align-items: center;
+  }
+  .home-hero img {
+    width: 50%;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+  }
+
+  .home-hero-capt {
+    margin-left: 2rem;
+  }
+
+  .home-hero-capt h2 {
+    font-size: 36px;
+  }
+
+  .home-hero-capt p {
+    font-size: 18px;
+  }
+
+  .fir-sec {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 5rem;
+    
+  }
+  .fir-sec .first {
+    width: 70%;
+  }
+  .fir-sec .second {
+    align-items: center;
+    width: 50%;
+    flex-direction: column;
+  }
+
+  .home-body .first {
+    /* background-color: rebeccapurple; */
+    height: 70vh;
+    display: flex;
+    align-items: baseline;
+    align-items: end;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: solid black 1px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+
+  .home-body .second a {
+    /* background-color: rebeccapurple; */
+    width: 100%;
+    height: 34vh;
+    display: flex;
+    align-items: baseline;
+    align-items: end;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: solid black 1px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+
+  .home-menu {
+    display: flex;
+    flex-direction: column;
+  }
+  .home-menu p {
+    /* background-color: rebeccapurple; */
+    padding: 20px;
+    width: 100%;
+    border: solid black 1px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
 }
