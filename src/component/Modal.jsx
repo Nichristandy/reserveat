@@ -1,6 +1,19 @@
 import React from "react";
 
-const Modal = ({ closeModal, tableName, seatNumber }) => {
+const Modal = ({
+  closeModal,
+  tableName,
+  seatNumber,
+  time,
+  date,
+  bookTable,
+}) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Call the bookTable function passed from props
+    bookTable();
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className=" md:min-w-[446px] bg-white rounded-xl">
@@ -18,7 +31,11 @@ const Modal = ({ closeModal, tableName, seatNumber }) => {
           <span className="text-2xl">Table: {tableName}</span>
           <span className="text-2xl">People: {seatNumber}</span>
         </div>
-        <form>
+        <div className="w-full pt-3 px-6 flex flex-row justify-between items-center">
+          <span className="text-2xl">date: {date}</span>
+          <span className="text-2xl">time: {time}</span>
+        </div>
+        <form onSubmit={handleSubmit}>
           <div className="rounded-b-xl flex-col flex py-4 px-6 gap-3">
             <div className="flex flex-col">
               <span className="text-2xl ml-2">Name</span>
