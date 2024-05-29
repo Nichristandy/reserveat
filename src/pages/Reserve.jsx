@@ -13,7 +13,6 @@ const reserve = () => {
   const [selectedTable, setSelectedTable] = useState([]);
   const [filteredTables, setFilteredTables] = useState([]);
   const [unFilteredTables, setUnFilteredTables] = useState([]);
-  const [refresh, setRefresh] = useState(false); // Initialize refresh state
 
   useEffect(() => {
     const loadTables = async () => {
@@ -22,7 +21,7 @@ const reserve = () => {
       setUnFilteredTables(data);
     };
     loadTables();
-  }, [tables]);
+  }, []);
 
   useEffect(() => {
     if (date && time && room) {
@@ -52,7 +51,8 @@ const reserve = () => {
     console.log(room);
   };
 
-  const bookTable = () => {
+  const bookTable = (e) => {
+    e.preventDefault();
     // Update the tables state to mark the selected table as booked
     const updatedTables = tables.map((table) =>
       table.tableName === selectedTable.tableName
