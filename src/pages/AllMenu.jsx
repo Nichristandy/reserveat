@@ -3,37 +3,85 @@ import Navbar from "../component/Navbar";
 
 const AllMenu = () => {
   return (
-    <div className="home-main">
+    <div className="seemore-main">
       <Navbar />
-
-      <section className="home-body">
+      <section className="seemore-body">
         <div>
           <h2>Top Restaurant</h2>
-          <a href="/seemore">See More </a>
         </div>
 
-        <span className="fir-sec">
+        <span className="seemore-fir-sec">
           <a
             href="/reservasi"
-            className="first bg-cover bg-center fir-sec bg-[url('/public/SeemoreAssets/burger_rio.jpg')] "
+            className="seemore-first bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/burger_rio.jpg')] "
           >
             Rio Burger
           </a>
-          <div className="second">
-            <a className="bg-cover bg-center fir-sec bg-[url('/public/SeemoreAssets/pizza_udin.jpg')]">
+          <div className="seemore-second justify-between">
+            <a
+              href="#"
+              className="bg-cover bg-center fir-sec bg-[url('/public/SeemoreAssets/pizza_udin.jpg')]"
+            >
               Pizza Udin
             </a>
-            <a className="bg-cover bg-center fir-sec bg-[url('/public/SeemoreAssets/pizza_udin.jpg')]">
-              Pizza Udin
+            <a
+              href="#"
+              className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/pizza_udin.jpg')]"
+            >
+              Pizza Quatro
             </a>
           </div>
         </span>
 
-        <div className="home-menu">
-          <p>Lorem Ipsum</p>
-          <p>Lorem Ipsum</p>
-          <p>Lorem Ipsum</p>
-          <p>Lorem Ipsum</p>
+        <div className="seemore-menu">
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/ayamgoyeng.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/cikenmasala.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/saladberenti.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/ramen.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/bacon.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/cookies.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/corndog.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
+          <a
+            href="#"
+            className="bg-cover bg-center fir-sec bg-[url('/SeemoreAssets/crepes.jpg')]"
+          >
+            Lorem Ipsum
+          </a>
         </div>
       </section>
     </div>
