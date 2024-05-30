@@ -3,7 +3,7 @@ import Navbar from "../component/Navbar";
 const Payment = () => {
   return (
     <div className="min-h-screen px-5 md:px-[72px] pb-10">
-      <Navbar />
+      <Navbar to={"/menu"} />
       <div className="w-full py-14">
         <div className="text-center font-medium pb-2 w-full uppercase border-b border-blue">
           ORDER

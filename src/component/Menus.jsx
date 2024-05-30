@@ -1,5 +1,5 @@
 import { GoPlusCircle, GoNoEntry } from "react-icons/go";
-const Menus = () => {
+const Menus = ({ payment, menuName, menuDesc, menuPrice }) => {
   return (
     <>
       {" "}
@@ -12,19 +12,20 @@ const Menus = () => {
           className="w-full flex md:hidden rounded-lg"
           src="https://placehold.co/137x72/png"
         ></img>
-        <span className="font-bold text-lg md:text-2xl">Lorem Ipsum</span>
-        <span className=" text-lg hidden md:flex">
-          description lorem ipsum doloris amet alknejdj
-        </span>
-        <div className="flex flex-row justify-between gap-2 w-full md:w-1/2 text-red">
-          <GoNoEntry size={32} />
-          <input
-            className="border border-red rounded-lg w-1/2"
-            type="number"
-          ></input>
+        <span className="font-bold text-lg md:text-2xl">{menuName}</span>
+        <span className=" text-lg hidden md:flex">{menuDesc}</span>
+        <span className=" text-lg hidden md:flex">{menuPrice}</span>
+        {payment && (
+          <div className="flex flex-row justify-between gap-2 w-full md:w-1/2 text-red">
+            <GoNoEntry size={32} />
+            <input
+              className="border border-red rounded-lg w-1/2"
+              type="number"
+            ></input>
 
-          <GoPlusCircle size={32} />
-        </div>
+            <GoPlusCircle size={32} />
+          </div>
+        )}
       </div>
     </>
   );

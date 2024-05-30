@@ -4,7 +4,7 @@ import Navbar from "../component/Navbar";
 const AllMenu = () => {
   return (
     <div className="seemore-main">
-      <Navbar />
+      <Navbar to={"/"} />
       <section className="seemore-body">
         <div>
           <h2>Top Restaurant</h2>

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { MdOutlineArrowBack, MdOutlineMenu } from "react-icons/md";
 import { useState } from "react";
 
-const Navbar = ({ to }) => {
+const Navbar = ({ to, isHomepage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleIsOpen = () => {
@@ -13,9 +13,11 @@ const Navbar = ({ to }) => {
     <>
       {" "}
       <div className="w-full flex flex-row justify-between items-center">
-        <NavLink to="/">
-          <MdOutlineArrowBack size={32} />
-        </NavLink>
+        {!isHomepage && (
+          <NavLink to={to}>
+            <MdOutlineArrowBack size={32} />
+          </NavLink>
+        )}
         <div className="flex flex-row items-center gap-3 py-3">
           <img src="../Logo-merah.svg" alt="logo" />
           <span className="font-black text-[32px]">Reserveat</span>

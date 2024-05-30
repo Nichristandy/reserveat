@@ -5,8 +5,7 @@ import SearchBar from "../component/searchBar";
 const Home = () => {
   return (
     <div className="home-main">
-      <Navbar />
-      <SearchBar />
+      <Navbar isHomepage={true} />
       <section className="home-hero">
         <img src="/HomeAssets/couple-enjoying-food-restaurant.jpg" alt="" />
         <span className="home-hero-capt">

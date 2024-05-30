@@ -4,7 +4,7 @@ import Navbar from "../component/Navbar";
 const History = () => {
   return (
     <div className="history-container">
-      <Navbar />
+      <Navbar to={"/allmenu"} />
       <section className="history-content">
         <h1>Order List</h1>
         <nav>

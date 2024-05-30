@@ -17,6 +17,8 @@ import DashboardCashier from "./pages/Dashboard/Cashier.jsx";
 import Menu from "./pages/Menu.jsx";
 import Payment from "./pages/Payment.jsx";
 import AllMenu from "./pages/AllMenu.jsx";
+import SeeMenu from "./pages/SeeMenu.jsx";
+import AddMenu from "./pages/Dashboard/AddMenu.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +61,8 @@ const router = createBrowserRouter([
   { path: "/admin/dashboard-cashier", element: <DashboardCashier /> },
   { path: "/menu", element: <Menu /> },
   { path: "/payment", element: <Payment /> },
+  { path: "/seemenu", element: <SeeMenu /> },
+  { path: "/admin/dashboard-menu", element: <AddMenu /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -3,6 +3,7 @@ import Table from "../component/Table";
 import Modal from "../component/Modal";
 import Navbar from "../component/Navbar";
 import { fetchTables } from "../DatabaseDummy/api";
+import { Link } from "react-router-dom";
 
 const reserve = () => {
   const [showModal, setShowModal] = useState(false);
@@ -52,7 +53,6 @@ const reserve = () => {
   };
 
   const bookTable = (e) => {
-    e.preventDefault();
     // Update the tables state to mark the selected table as booked
     const updatedTables = tables.map((table) =>
       table.tableName === selectedTable.tableName
@@ -69,12 +69,13 @@ const reserve = () => {
     );
     setFilteredTables(updatedFilteredTables);
     closeModal();
+    e.preventDefault();
   };
 
   return (
     <>
       <div className="min-h-screen px-5 md:px-[72px] pb-10">
-        <Navbar to={"/"} />
+        <Navbar to={"/allmenu"} />
 
         <div className="pt-16 flex flex-col md:flex-row w-full">
           {/* sisi kiri */}
@@ -83,25 +84,27 @@ const reserve = () => {
             <span className="font-medium text-2xl mt-3 md:mt-6">
               Choose your table
             </span>
-            <div className="flex flex-col md:flex-row gap-5 mt-2 md:mt-5">
-              {" "}
-              <div className="flex flex-row gap-5 items-center">
-                <span className="text-2xl font-bold">Hour:</span>{" "}
-                <input
-                  type="time"
-                  className="bg-grey rounded-xl text-black uppercase px-2 py-1 text-2xl focus:outline-none"
-                  onChange={(e) => setTime(e.target.value)}
-                ></input>
+            <form onSubmit={bookTable}>
+              <div className="flex flex-col md:flex-row gap-5 mt-2 md:mt-5">
+                {" "}
+                <div className="flex flex-row gap-5 items-center">
+                  <span className="text-2xl font-bold">Hour:</span>{" "}
+                  <input
+                    type="time"
+                    className="bg-grey rounded-xl text-black uppercase px-2 py-1 text-2xl focus:outline-none"
+                    onChange={(e) => setTime(e.target.value)}
+                  ></input>
+                </div>
+                <div className="flex flex-row gap-5 items-center">
+                  <span className="text-2xl font-bold">Date:</span>{" "}
+                  <input
+                    type="date"
+                    className="bg-grey rounded-xl text-black px-2 py-1 focus:outline-none  text-xl"
+                    onChange={(e) => setDate(e.target.value)}
+                  ></input>
+                </div>
               </div>
-              <div className="flex flex-row gap-5 items-center">
-                <span className="text-2xl font-bold">Date:</span>{" "}
-                <input
-                  type="date"
-                  className="bg-grey rounded-xl text-black px-2 py-1 focus:outline-none  text-xl"
-                  onChange={(e) => setDate(e.target.value)}
-                ></input>
-              </div>
-            </div>
+            </form>
             {/* filter table */}
             <div className=" mt-14 flex flex-row gap-8">
               <input
@@ -121,6 +124,7 @@ const reserve = () => {
                 onClick={handleRoomChange}
               ></input>
             </div>
+
             {/* mapping table component */}
             <div className="w-full grid grid-cols-5 gap-5 mt-10 pb-5 md:pb-10">
               {filteredTables.map((table) => (
@@ -137,12 +141,15 @@ const reserve = () => {
           {/* menu sisi kanan */}
           <div className="w-full md:w-1/2 md:pl-8 flex flex-col gap-16">
             <div className="md:hidden flex"></div>
-            <div className="w-full min-h-[146px] md:min-h-[311px] relative image-back md:px-5 ">
+            <Link
+              to={"/seemenu"}
+              className="w-full min-h-[146px] md:min-h-[311px] relative image-back md:px-5 "
+            >
               <img src="../beef.png" className="z-0 absolute"></img>
               <span className="absolute z-1 text-white font-black text-2xl md:text-5xl top-full md:top-full left-1 md:left-10">
                 See Menu
               </span>
-            </div>
+            </Link>
             <div className="w-full mt-4 md:mt-16 flex-col flex gap-8 md:px-5">
               <span className="font-medium text-xl">Favorites</span>
               <div className="w-full grid grid-cols-4 md:grid-cols-6 gap-5">

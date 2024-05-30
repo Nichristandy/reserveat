@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Modal = ({
   closeModal,
@@ -71,12 +72,13 @@ const Modal = ({
             >
               Reserve
             </button>
-            <button
+            <Link
               type="submit"
+              to={"/menu"}
               className="bg-red rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl"
             >
               ORDER FOOD
-            </button>
+            </Link>
           </div>
         </form>
       </div>
