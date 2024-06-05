@@ -25,10 +25,13 @@ const Navbar = ({ to, isHomepage }) => {
 
     setIsLogin(true);
     alert("you are logged in");
+    setModal(false);
   };
 
   const handleLogout = () => {
     setIsLogin(false);
+    alert("you are logged out");
+    setModal(false);
   };
 
   return (
@@ -53,17 +56,17 @@ const Navbar = ({ to, isHomepage }) => {
           </NavLink>
           {isLogin ? (
             <button
-              onClick={handleOpenModal}
-              className="bg-red hidden md:flex rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl"
-            >
-              LOGIN
-            </button>
-          ) : (
-            <button
               onClick={handleLogout}
               className="bg-red hidden md:flex rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl"
             >
               LOG OUT
+            </button>
+          ) : (
+            <button
+              onClick={handleOpenModal}
+              className="bg-red hidden md:flex rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl"
+            >
+              LOG IN
             </button>
           )}
         </div>
@@ -77,7 +80,7 @@ const Navbar = ({ to, isHomepage }) => {
         </div>
       )}
       {modal && (
-        <ModalLayout onClick={handleCloseModal}>
+        <ModalLayout closeModal={handleCloseModal}>
           <form onSubmit={handleLogin}>
             <div className="rounded-b-xl flex-col flex py-4 px-6 gap-3">
               <div className="flex flex-col">
