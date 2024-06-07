@@ -21,7 +21,7 @@ const reserve = () => {
   useEffect(() => {
     const loadTables = async () => {
       const data = await fetchTables(room);
-      console.log(data.data);
+      // console.log(data.data);
       setTables(data.data);
       setUnFilteredTables(data.data);
     };
@@ -57,9 +57,10 @@ const reserve = () => {
     console.log(room);
   };
 
-  const handleBookTable = async (e) => {
+  const handleBookTable = async (buttonValue) => {
     if (!selectedTable) return;
 
+    console.log("Button clicked:", buttonValue);
     // Combine date and time
     const response = await bookTables(
       selectedTable.nomor_meja,
@@ -73,14 +74,15 @@ const reserve = () => {
       phone,
       userName,
       selectedTable.id_asset_toko,
-      selectedTable.status_tempat
+      selectedTable.status_tempat,
+      buttonValue
     );
     console.log(response);
 
     // Update the tables state to set the status of the booked table to false
     const updatedTables = tables.map((table) =>
       table.nomor_meja === selectedTable.nomor_meja
-        ? { ...table, status_tempat: false, date, time }
+        ? { ...table, status_tempat: 1, date, time }
         : table
     );
     setTables(updatedTables);

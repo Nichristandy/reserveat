@@ -33,7 +33,8 @@ export const bookTables = async (
   phone_number,
   name,
   id_asset,
-  status_tempat
+  status_tempat,
+  buttonValue
 ) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/CreateReservasi`, {
@@ -43,7 +44,7 @@ export const bookTables = async (
       id_user: id_user,
       tempat: room,
       id_toko: id_toko,
-      tombol: "reservasi",
+      tombol: buttonValue,
       people: people,
       email: email,
       phone_number: phone_number,
@@ -89,9 +90,9 @@ export const fetchMenuRestaurant = async () => {
   }
 };
 
-export const updateMenuRestaurant = async () => {
+export const updateMenuRestaurant = async (menu_id) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}`);
+    const response = await axios.post(`${API_BASE_URL}/Menu/${menu_id}`);
 
     return response.data;
   } catch (error) {
@@ -109,9 +110,13 @@ export const deleteMenuRestaurant = async () => {
   }
 };
 
-export const createMenuRestaurant = async () => {
+export const createMenuRestaurant = async (menuName, menuDesc, menuPrice) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}`);
+    const response = await axios.post(`${API_BASE_URL}`, {
+      nama_menu: menuDesc,
+      harga_menu: menuPrice,
+      desc_menu: menuDesc,
+    });
 
     return response.data;
   } catch (error) {
@@ -166,6 +171,43 @@ export const createCashier = async () => {
   }
 };
 export const fetchUserStatistic = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}`);
+
+    return response.data;
+  } catch (error) {
+    console.error("There was an error fetching cashier data");
+  }
+};
+
+export const fetchAssets = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}`);
+
+    return response.data;
+  } catch (error) {
+    console.error("There was an error fetching cashier data");
+  }
+};
+export const deleteAssets = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}`);
+
+    return response.data;
+  } catch (error) {
+    console.error("There was an error fetching cashier data");
+  }
+};
+export const updateAssets = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}`);
+
+    return response.data;
+  } catch (error) {
+    console.error("There was an error fetching cashier data");
+  }
+};
+export const createAssets = async () => {
   try {
     const response = await axios.post(`${API_BASE_URL}`);
 

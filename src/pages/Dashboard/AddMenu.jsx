@@ -4,29 +4,12 @@ import {
   MdOutlineDelete,
   MdOutlineModeEdit,
 } from "react-icons/md";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { fetchMenuRestaurant } from "../../DatabaseDummy/api";
 import ModalLayout from "../../component/ModalLayout";
 
 const AddMenu = () => {
-  const [menus, setMenus] = useState([
-    {
-      id: 1,
-      menuName: "Burger",
-      menuDesc: "Burger with cheese",
-      menuPrice: "Rp 10.000",
-      type: "meal",
-      menuImage: "https://placehold.co/72x72/png",
-    },
-    {
-      id: 2,
-      menuName: "Fried rice",
-      menuDesc: "Delicious rice with bacon",
-      menuPrice: "Rp 10.000",
-      type: "meal",
-      menuImage: "https://placehold.co/72x72/png",
-    },
-  ]);
+  const [allMenu, setAllMenu] = useState([]);
   const [menuName, setMenuName] = useState("");
   const [menuPrice, setMenuPrice] = useState("");
   const [menuDesc, setMenuDesc] = useState("");
@@ -39,6 +22,14 @@ const AddMenu = () => {
   const handleOpenModal = () => {
     setIsOpen(true);
   };
+
+  useEffect(() => {
+    const loadMenu = async () => {
+      const data = await fetchMenuRestaurant();
+      setAllMenu(data.data);
+    };
+    loadMenu();
+  }, []);
 
   const handleCloseModal = () => {
     setIsOpen(false);
@@ -71,7 +62,7 @@ const AddMenu = () => {
         : "https://placehold.co/72x72/png",
       type,
     };
-    setMenus([...menus, newMenu]);
+    setAllMenu([...allMenu, newMenu]);
     handleCloseModal();
   };
 

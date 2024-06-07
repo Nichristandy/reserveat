@@ -19,7 +19,7 @@ import Payment from "./pages/Payment.jsx";
 import AllMenu from "./pages/AllMenu.jsx";
 import SeeMenu from "./pages/SeeMenu.jsx";
 import AddMenu from "./pages/Dashboard/AddMenu.jsx";
-import Coba from "./pages/Coba.jsx";
+import Assets from "./pages/Dashboard/Assets.jsx";
 
 const router = createBrowserRouter([
   {
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
   { path: "/payment", element: <Payment /> },
   { path: "/seemenu", element: <SeeMenu /> },
   { path: "/admin/dashboard-menu", element: <AddMenu /> },
-  { path: "/coba", element: <Coba /> },
+  { path: "/admin/dashboard-assets", element: <Assets /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

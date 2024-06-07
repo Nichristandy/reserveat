@@ -46,6 +46,12 @@ const SideBar = ({ role }) => {
           >
             Menu
           </NavLink>
+          <NavLink
+            to={"/admin/dashboard-assets"}
+            className={({ isActive }) => (isActive ? "font-bold" : "")}
+          >
+            Assets
+          </NavLink>
         </div>
         <span className="text-xl">Log out</span>
       </div>

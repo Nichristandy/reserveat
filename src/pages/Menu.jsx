@@ -4,6 +4,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 const Menu = () => {
   const [room, setRoom] = useState("");
+  const [order, setOrder] = useState([
+    { menuName: "burger", qty: 10 },
+    { menuName: "Fried Rice", qty: 10 },
+  ]);
   const menus = [
     {
       menuName: "Burger",
@@ -49,25 +53,9 @@ const Menu = () => {
           ></input>
           <input
             type="button"
-            value={"rice"}
-            className={`bg-grey rounded-xl text-black ${
-              room == "rice" ? "font-bold" : "font-normal"
-            }  px-2 py-1 text-2xl cursor-pointer`}
-            onClick={handleRoomChange}
-          ></input>
-          <input
-            type="button"
             value={"drink"}
             className={`bg-grey rounded-xl text-black ${
               room == "drink" ? "font-bold" : "font-normal"
-            }  px-2 py-1 text-2xl cursor-pointer`}
-            onClick={handleRoomChange}
-          ></input>
-          <input
-            type="button"
-            value={"full course"}
-            className={`bg-grey rounded-xl text-black ${
-              room == "full course" ? "font-bold" : "font-normal"
             }  px-2 py-1 text-2xl cursor-pointer`}
             onClick={handleRoomChange}
           ></input>

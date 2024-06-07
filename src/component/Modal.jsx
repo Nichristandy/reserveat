@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Modal = ({
   closeModal,
@@ -12,10 +12,15 @@ const Modal = ({
   phone,
   userName,
 }) => {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = (e, buttonValue) => {
     e.preventDefault();
     // Call the bookTable function passed from props
-    bookTable();
+    bookTable(buttonValue);
+
+    if (buttonValue == "order") {
+      navigate("/menu");
+    }
   };
 
   return (
@@ -39,7 +44,7 @@ const Modal = ({
           <span className="text-2xl">date: {date}</span>
           <span className="text-2xl">time: {time}</span>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e, "reservasi")}>
           <div className="rounded-b-xl flex-col flex py-4 px-6 gap-3">
             <div className="flex flex-col">
               <span className="text-2xl ml-2">Name</span>
@@ -74,17 +79,19 @@ const Modal = ({
           <div className="mt-4 flex flex-row py-4 px-6 justify-between items-end">
             <button
               type="submit"
+              value={"reservasi"}
               className="bg-blue rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl"
             >
               Reserve
             </button>
-            <Link
+            <button
               type="submit"
+              onClick={(e) => handleSubmit(e, "order")}
               to={"/menu"}
               className="bg-red rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl"
             >
               ORDER FOOD
-            </Link>
+            </button>
           </div>
         </form>
       </div>
