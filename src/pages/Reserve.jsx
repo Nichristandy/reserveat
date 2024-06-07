@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Table from "../component/Table";
 import Modal from "../component/Modal";
 import Navbar from "../component/Navbar";
-import { fetchTables } from "../DatabaseDummy/api";
+import { bookTables, fetchTables } from "../DatabaseDummy/api";
 import { Link } from "react-router-dom";
 
 const reserve = () => {
@@ -14,13 +14,18 @@ const reserve = () => {
   const [selectedTable, setSelectedTable] = useState([]);
   const [filteredTables, setFilteredTables] = useState([]);
   const [unFilteredTables, setUnFilteredTables] = useState([]);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const loadTables = async () => {
-      const data = await fetchTables();
-      setTables(data);
-      setUnFilteredTables(data);
+      const data = await fetchTables(room);
+      console.log(data.data);
+      setTables(data.data);
+      setUnFilteredTables(data.data);
     };
+    console.log(tables);
     loadTables();
   }, []);
 
@@ -28,7 +33,7 @@ const reserve = () => {
     if (date && time && room) {
       const filtered = unFilteredTables.filter(
         (table) =>
-          table.room.toLowerCase() === room.toLowerCase() &&
+          table.pilihan_tempat.toLowerCase() === room.toLowerCase() &&
           (!table.date || table.date !== date || table.time !== time)
       );
       setFilteredTables(filtered);
@@ -52,24 +57,43 @@ const reserve = () => {
     console.log(room);
   };
 
-  const bookTable = (e) => {
-    // Update the tables state to mark the selected table as booked
+  const handleBookTable = async (e) => {
+    if (!selectedTable) return;
+
+    // Combine date and time
+    const response = await bookTables(
+      selectedTable.nomor_meja,
+      time,
+      date,
+      selectedTable.id_user,
+      room,
+      selectedTable.id_toko,
+      selectedTable.jumlah_people,
+      email,
+      phone,
+      userName,
+      selectedTable.id_asset_toko,
+      selectedTable.status_tempat
+    );
+    console.log(response);
+
+    // Update the tables state to set the status of the booked table to false
     const updatedTables = tables.map((table) =>
-      table.tableName === selectedTable.tableName
-        ? { ...table, status: false, date, time }
+      table.nomor_meja === selectedTable.nomor_meja
+        ? { ...table, status_tempat: false, date, time }
         : table
     );
     setTables(updatedTables);
 
-    // Update filteredTables as well
+    // Update the filteredTables state similarly
     const updatedFilteredTables = filteredTables.map((table) =>
-      table.tableName === selectedTable.tableName
-        ? { ...table, status: false, date, time }
+      table.nomor_meja === selectedTable.nomor_meja
+        ? { ...table, status_tempat: 1, date, time }
         : table
     );
     setFilteredTables(updatedFilteredTables);
+
     closeModal();
-    e.preventDefault();
   };
 
   return (
@@ -84,7 +108,7 @@ const reserve = () => {
             <span className="font-medium text-2xl mt-3 md:mt-6">
               Choose your table
             </span>
-            <form onSubmit={bookTable}>
+            <form onSubmit={handleBookTable}>
               <div className="flex flex-col md:flex-row gap-5 mt-2 md:mt-5">
                 {" "}
                 <div className="flex flex-row gap-5 items-center">
@@ -129,10 +153,10 @@ const reserve = () => {
             <div className="w-full grid grid-cols-5 gap-5 mt-10 pb-5 md:pb-10">
               {filteredTables.map((table) => (
                 <Table
-                  key={table.tableName}
-                  tableName={table.tableName}
-                  seatNumber={table.seatNumber}
-                  status={table.status}
+                  key={table.nomor_meja}
+                  tableName={table.nomor_meja}
+                  seatNumber={table.jumlah_people}
+                  status={table.status_tempat}
                   openModal={() => openModal(table)}
                 />
               ))}
@@ -165,11 +189,14 @@ const reserve = () => {
       {showModal ? (
         <Modal
           closeModal={closeModal}
-          tableName={selectedTable.tableName}
-          seatNumber={selectedTable.seatNumber}
+          tableName={selectedTable.nomor_meja}
+          seatNumber={selectedTable.jumlah_people}
           date={date}
           time={time}
-          bookTable={bookTable}
+          bookTable={handleBookTable}
+          email={(e) => setEmail(e.target.value)}
+          phone={(e) => setPhone(e.target.value)}
+          userName={(e) => setUserName(e.target.value)}
         />
       ) : (
         ""

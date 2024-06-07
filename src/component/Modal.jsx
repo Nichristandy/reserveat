@@ -8,6 +8,9 @@ const Modal = ({
   time,
   date,
   bookTable,
+  email,
+  phone,
+  userName,
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +44,7 @@ const Modal = ({
             <div className="flex flex-col">
               <span className="text-2xl ml-2">Name</span>
               <input
+                onChange={userName}
                 type="text"
                 placeholder="input your name"
                 className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
@@ -51,6 +55,7 @@ const Modal = ({
               <span className="text-2xl ml-2">Phone Number</span>
               <input
                 type="tel"
+                onChange={phone}
                 placeholder="input your phone number"
                 className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
               ></input>
@@ -60,6 +65,7 @@ const Modal = ({
               <span className="text-2xl ml-2">Email</span>
               <input
                 type="email"
+                onChange={email}
                 placeholder="input your email"
                 className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
               ></input>
