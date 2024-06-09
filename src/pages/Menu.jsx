@@ -13,11 +13,13 @@ const Menu = () => {
       menuName: "Burger",
       menuDesc: "Burger with cheese",
       menuPrice: "Rp 10.000",
+      menuImg: "/SeemoreAssets/burger_rio.jpg",
     },
     {
-      menuName: "Fried rice",
-      menuDesc: "Delicious rice with bacon",
+      menuName: "Pizza",
+      menuDesc: "Great Pizza with amazing cheese  ",
       menuPrice: "Rp 10.000",
+      menuImg: "/SeemoreAssets/pizza_udin.jpg",
     },
   ];
   const handleRoomChange = (e) => {
@@ -30,7 +32,7 @@ const Menu = () => {
       <Navbar to={"/reservasi"} />
       <div className=" mt-16">
         <div className="flex flex-col gap-6">
-          <span className="font-bold text-5xl">Lorem Ipsum</span>
+          <span className="font-bold text-5xl">Burger Rio</span>
           <span className="font-medium text-2xl">Choose your food</span>
         </div>
         {/* filter table */}

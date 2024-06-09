@@ -79,7 +79,7 @@ const AddMenu = () => {
 
   const handleUpdateMenu = (e) => {
     e.preventDefault();
-    const updatedMenus = menus.map((menu) =>
+    const updatedMenus = allMenu.map((menu) =>
       menu.id === editingMenuId
         ? {
             ...menu,
@@ -93,7 +93,7 @@ const AddMenu = () => {
           }
         : menu
     );
-    setMenus(updatedMenus);
+    setAllMenu(updatedMenus);
     handleCloseModal();
   };
 
@@ -155,6 +155,7 @@ const AddMenu = () => {
                   <button onClick={() => handleDeleteMenu(menu.id)}>
                     <MdOutlineDelete className="text-red" size={32} />
                   </button>
+                  
                 </div>
               </div>
             ))}

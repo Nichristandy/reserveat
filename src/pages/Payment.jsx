@@ -1,4 +1,5 @@
 import Navbar from "../component/Navbar";
+import { Link } from "react-router-dom";
 
 const Payment = () => {
   return (
@@ -10,7 +11,7 @@ const Payment = () => {
         </div>
         <div className="flex flex-row w-full justify-between items-center mt-5">
           <div className="flex flex-col ">
-            <h1 className="text-lg font-medium">lorem ipsum</h1>
+            <h1 className="text-lg font-medium">Burger</h1>
             <div className="flex flex-col">
               <span>Rp 30.000</span>
               <span>Quantity: 3</span>
@@ -18,8 +19,8 @@ const Payment = () => {
           </div>
           <div>
             <img
-              className=" rounded-full"
-              src="https://placehold.co/86x86/png"
+              className=" rounded-full w-[86px] h-[86px]"
+              src="/SeemoreAssets/burger_rio.jpg"
             ></img>
           </div>
         </div>
@@ -82,12 +83,15 @@ const Payment = () => {
               </span>
             </div>
             {/* submit button */}
-            <button
-              type="submit"
-              className="bg-red text-white text-2xl font-medium uppercase w-full md:w-4/12 py-2 mt-16 rounded-xl"
-            >
-              Place Order
-            </button>
+            <div className="mt-16">
+              <Link
+                to={"/"}
+                type="submit"
+                className="bg-red text-white text-2xl font-medium uppercase w-full md:w-4/12 py-2 rounded-xl px-3"
+              >
+                Place Order
+              </Link>
+            </div>
           </form>
         </div>
       </div>

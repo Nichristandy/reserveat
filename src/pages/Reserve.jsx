@@ -179,9 +179,24 @@ const reserve = () => {
             <div className="w-full mt-4 md:mt-16 flex-col flex gap-8 md:px-5">
               <span className="font-medium text-xl">Favorites</span>
               <div className="w-full grid grid-cols-4 md:grid-cols-6 gap-5">
-                <div className="col-span-2 min-h-[202px] bg-grey rounded-xl"></div>
-                <div className="col-span-2 min-h-[202px] bg-grey rounded-xl"></div>
-                <div className="col-span-2 min-h-[202px] bg-grey rounded-xl"></div>
+                <div className="col-span-2 min-h-[202px] max-h-[202px] bg-grey rounded-xl overflow-clip">
+                  <img
+                    src="../../SeemoreAssets/ramen.jpg"
+                    className="rounded-xl w-full"
+                  ></img>
+                </div>
+                <div className="col-span-2 min-h-[202px] bg-grey rounded-xl overflow-clip">
+                  <img
+                    src="../../SeemoreAssets/burger_rio.jpg"
+                    className="rounded-xl w-full min-h-[202px]"
+                  ></img>
+                </div>
+                <div className="col-span-2 min-h-[202px] bg-grey rounded-xl">
+                  <img
+                    src="../../SeemoreAssets/pizza_udin.jpg"
+                    className="rounded-xl w-full h-full"
+                  ></img>
+                </div>
               </div>
             </div>
           </div>
