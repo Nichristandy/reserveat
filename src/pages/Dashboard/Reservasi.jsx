@@ -1,10 +1,43 @@
 import SideBar from "../../component/SideBar";
 import Table from "../../component/Table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchTables } from "../../DatabaseDummy/api";
+
 const Reservasi = () => {
-  const indoorSeat = [6, 6, 2, 6, 2, 2, 2, 6, 6, 2];
-  const outdoorSeat = [6, 2, 6, 2, 2, 2, 6, 2, 6, 6];
+  const [tables, setTables] = useState([]);
   const [room, setRoom] = useState("");
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [selectedTable, setSelectedTable] = useState([]);
+  const [filteredTables, setFilteredTables] = useState([]);
+  const [unFilteredTables, setUnFilteredTables] = useState([]);
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const loadTables = async () => {
+      const data = await fetchTables(room);
+      // console.log(data.data);
+      setTables(data.data);
+      setUnFilteredTables(data.data);
+    };
+    console.log(tables);
+    loadTables();
+  }, []);
+
+  useEffect(() => {
+    if (date && time && room) {
+      const filtered = unFilteredTables.filter(
+        (table) =>
+          table.pilihan_tempat.toLowerCase() === room.toLowerCase() &&
+          (!table.date || table.date !== date || table.time !== time)
+      );
+      setFilteredTables(filtered);
+    } else {
+      setFilteredTables(unFilteredTables);
+    }
+  }, [date, time, room, unFilteredTables]);
 
   const handleRoomChange = (e) => {
     setRoom(e.target.value);
@@ -53,13 +86,14 @@ const Reservasi = () => {
               ></input>
             </div>
             <div className="w-full grid grid-cols-5 gap-5 mt-10">
-              {room == "Indoor"
-                ? indoorSeat.map((seat, id) => (
-                    <Table key={id} seatNumber={seat} />
-                  ))
-                : outdoorSeat.map((seat, id) => (
-                    <Table key={id} seatNumber={seat} />
-                  ))}
+              {filteredTables.map((table) => (
+                <Table
+                  key={table.nomor_meja}
+                  tableName={table.nomor_meja}
+                  seatNumber={table.jumlah_people}
+                  status={table.status_tempat}
+                />
+              ))}
             </div>
           </div>
           <div className="col-span-5">

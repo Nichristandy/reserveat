@@ -4,17 +4,32 @@ import {
   MdOutlineDelete,
   MdOutlineModeEdit,
 } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalLayout from "../../component/ModalLayout";
+import {
+  fetchCashier,
+  createCashier,
+  updateCashier,
+  deleteCashier,
+} from "../../DatabaseDummy/api";
 
 const DashboardCashier = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [cashiers, setCashiers] = useState([]);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [currentUser, setCurrentUser] = useState({ id: null, name: "" });
+  const role = "cashier";
+  const [currentCashier, setCurrentCashier] = useState({ id: null, name: "" });
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    const loadCashiers = async () => {
+      const data = await fetchCashier();
+      setCashiers(data.data);
+    };
+    loadCashiers();
+  }, []);
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -24,41 +39,42 @@ const DashboardCashier = () => {
     setOpenModal(false);
   };
 
-  const addUser = (e) => {
+  const addCashier = async (e) => {
     e.preventDefault();
+    const newCashier = {
+      name,
+      email,
+      password,
+      role,
+    };
     if (isEditing) {
-      updateUser();
+      await updateCashier(currentCashier.name, newCashier);
+      setCashiers(
+        cashiers.map((cashier) =>
+          cashier.name === currentCashier.name
+            ? { ...cashier, ...newCashier }
+            : cashier
+        )
+      );
     } else {
-      setUsers([...users, { id: Date.now(), name, email, password }]);
+      const createdCashier = await createCashier(newCashier);
+      setCashiers([...cashiers, createdCashier]);
     }
-
-    setName("");
-    setEmail("");
-    setPassword("");
-    setOpenModal(false);
+    handleCloseModal();
   };
 
-  const editUser = (user) => {
+  const editCashier = (cashier) => {
     setIsEditing(true);
-    setCurrentUser(user);
-    setName(user.name);
-    setEmail(user.email);
-    setPassword(user.password);
+    setCurrentCashier(cashier);
+    setName(cashier.name);
+    setEmail(cashier.email);
+    setPassword(cashier.password);
     handleOpenModal();
   };
 
-  const updateUser = () => {
-    setUsers(
-      users.map((user) =>
-        user.id === currentUser.id ? { ...user, name, email, password } : user
-      )
-    );
-    setIsEditing(false);
-    setCurrentUser({ id: null, name: "", email: "", password: "" });
-  };
-
-  const deleteUser = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
+  const handleDeleteCashier = async (name) => {
+    await deleteCashier(name);
+    setCashiers(cashiers.filter((cashier) => cashier.name !== name));
   };
 
   return (
@@ -86,20 +102,20 @@ const DashboardCashier = () => {
           </div>
 
           <div className="flex flex-col gap-5 w-8/12">
-            {users.map((user) => (
+            {cashiers.map((cashier) => (
               <div
                 className="px-4 py-2 flex flex-row w-full border-blue border rounded-xl justify-between items-center"
-                key={user.id}
+                key={cashier.id}
               >
                 <div className="flex flex-col gap-3">
-                  <span className="text-2xl font-bold">{user.name}</span>
-                  <span className="text-lg">{user.email}</span>
+                  <span className="text-2xl font-bold">{cashier.name}</span>
+                  <span className="text-lg">{cashier.email}</span>
                 </div>
                 <div className="flex gap-3 items-center">
-                  <button onClick={() => editUser(user)}>
+                  <button onClick={() => editCashier(cashier)}>
                     <MdOutlineModeEdit className="text-blue" size={32} />
                   </button>
-                  <button onClick={() => deleteUser(user.id)}>
+                  <button onClick={() => handleDeleteCashier(cashier.name)}>
                     <MdOutlineDelete className="text-red" size={32} />
                   </button>
                 </div>
@@ -111,7 +127,7 @@ const DashboardCashier = () => {
       {/* modal */}
       {openModal && (
         <ModalLayout closeModal={handleCloseModal}>
-          <form onSubmit={addUser}>
+          <form onSubmit={addCashier}>
             <div className="rounded-b-xl flex-col flex py-4 px-6 gap-3">
               <div className="flex flex-col">
                 <span className="text-2xl ml-2">Name</span>
@@ -121,6 +137,7 @@ const DashboardCashier = () => {
                   placeholder="input your name"
                   onChange={(e) => setName(e.target.value)}
                   className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
+                  required
                 ></input>
               </div>
 
@@ -132,6 +149,7 @@ const DashboardCashier = () => {
                   placeholder="input your email"
                   onChange={(e) => setEmail(e.target.value)}
                   className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
+                  required
                 ></input>
               </div>
               <div className="flex flex-col">
@@ -142,6 +160,7 @@ const DashboardCashier = () => {
                   placeholder="input your password"
                   onChange={(e) => setPassword(e.target.value)}
                   className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
+                  required
                 ></input>
               </div>
             </div>

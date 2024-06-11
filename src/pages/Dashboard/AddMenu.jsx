@@ -5,7 +5,12 @@ import {
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { useState, useEffect } from "react";
-import { fetchMenuRestaurant } from "../../DatabaseDummy/api";
+import {
+  fetchMenuRestaurant,
+  createMenuRestaurant,
+  deleteMenuRestaurant,
+  updateMenuRestaurant,
+} from "../../DatabaseDummy/api";
 import ModalLayout from "../../component/ModalLayout";
 
 const AddMenu = () => {
@@ -50,18 +55,18 @@ const AddMenu = () => {
     setMenuImage(e.target.files[0]);
   };
 
-  const handleAddMenu = (e) => {
+  const handleAddMenu = async (e) => {
     e.preventDefault();
     const newMenu = {
-      id: Date.now(),
-      menuName,
-      menuDesc,
-      menuPrice,
+      nama_menu: menuName,
+      desc_menu: menuDesc,
+      harga_menu: menuPrice,
+      type: type,
       menuImage: menuImage
         ? URL.createObjectURL(menuImage)
         : "https://placehold.co/72x72/png",
-      type,
     };
+    await createMenuRestaurant(menuName, menuDesc, menuPrice);
     setAllMenu([...allMenu, newMenu]);
     handleCloseModal();
   };
@@ -77,29 +82,30 @@ const AddMenu = () => {
     handleOpenModal();
   };
 
-  const handleUpdateMenu = (e) => {
+  const handleUpdateMenu = async (e) => {
     e.preventDefault();
+    const updatedMenu = {
+      id: editingMenuId,
+      nama_menu: menuName,
+      desc_menu: menuDesc,
+      harga_menu: menuPrice,
+      type: type,
+      menuImage: menuImage
+        ? URL.createObjectURL(menuImage)
+        : allMenu.find((menu) => menu.id === editingMenuId).menuImage,
+    };
+    await updateMenuRestaurant(editingMenuId, updatedMenu);
     const updatedMenus = allMenu.map((menu) =>
-      menu.id === editingMenuId
-        ? {
-            ...menu,
-            menuName,
-            menuDesc,
-            menuPrice,
-            menuImage: menuImage
-              ? URL.createObjectURL(menuImage)
-              : menu.menuImage,
-            type,
-          }
-        : menu
+      menu.id === editingMenuId ? updatedMenu : menu
     );
     setAllMenu(updatedMenus);
     handleCloseModal();
   };
 
-  const handleDeleteMenu = (menuId) => {
-    const filteredMenus = menus.filter((menu) => menu.id !== menuId);
-    setMenus(filteredMenus);
+  const handleDeleteMenu = async (menuId) => {
+    await deleteMenuRestaurant(menuId);
+    const filteredMenus = allMenu.filter((menu) => menu.id !== menuId);
+    setAllMenu(filteredMenus);
   };
 
   return (
@@ -116,7 +122,7 @@ const AddMenu = () => {
               <input
                 className="bg-grey w-full focus:outline-none text-xl"
                 type="text"
-                placeholder="Search User"
+                placeholder="Search Menu"
               ></input>
             </div>
             <button
@@ -127,7 +133,7 @@ const AddMenu = () => {
             </button>
           </div>
           <div className="flex flex-col gap-5 w-8/12">
-            {menus.map((menu) => (
+            {allMenu.map((menu) => (
               <div
                 className="px-4 py-2 flex flex-row w-full border-blue border rounded-xl justify-between items-center"
                 key={menu.menuName}
@@ -155,7 +161,6 @@ const AddMenu = () => {
                   <button onClick={() => handleDeleteMenu(menu.id)}>
                     <MdOutlineDelete className="text-red" size={32} />
                   </button>
-                  
                 </div>
               </div>
             ))}

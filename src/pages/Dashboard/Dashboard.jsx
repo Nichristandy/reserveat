@@ -1,16 +1,42 @@
 import LineChart from "../../component/Charts/LineChart";
 import SideBar from "../../component/SideBar";
 import UserBar from "../../component/UserBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "../../component/Table";
 import { Link } from "react-router-dom";
+import { fetchTables, fetchUser, fetchCashier } from "../../DatabaseDummy/api";
 
 const Dashboard = () => {
-  const users = ["John doe", "Mary Jane", "Doe John", "Jane Mary"];
-  const cashiers = [
-    { id: 1, name: "Cakra Johan", email: "cakrajohan12@gmail.com" },
-    { id: 2, name: "Joshua Andika", email: "joshandika33@gmail.com" },
-  ];
+  const [users, setUsers] = useState([]);
+  const [cashiers, setCashiers] = useState([]);
+  const [tables, setTables] = useState([]);
+  const [unFilteredTables, setUnFilteredTables] = useState([]);
+
+  useEffect(() => {
+    const loadTables = async () => {
+      const data = await fetchTables(room);
+      // console.log(data.data);
+      setTables(data.data);
+      setUnFilteredTables(data.data);
+    };
+
+    const loadUsers = async () => {
+      const data = await fetchUser();
+
+      setUsers(data.data);
+    };
+
+    const loadCashiers = async () => {
+      const data = await fetchCashier();
+
+      setCashiers(data.data);
+    };
+
+    console.log(tables);
+    loadCashiers();
+    loadUsers();
+    loadTables();
+  }, []);
 
   const indoorSeat = [6, 6, 2, 6, 2, 2, 2, 6, 6, 2];
   const outdoorSeat = [6, 2, 6, 2, 2, 2, 6, 2, 6, 6];

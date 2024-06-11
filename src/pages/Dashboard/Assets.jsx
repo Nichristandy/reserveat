@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SideBar from "../../component/SideBar";
-import {
-  MdOutlineModeEdit,
-  MdOutlineDelete,
-  MdOutlineArrowDropDown,
-} from "react-icons/md";
+import { MdOutlineModeEdit, MdOutlineDelete } from "react-icons/md";
 import ModalLayout from "../../component/ModalLayout";
+import {
+  fetchAssets,
+  updateAssets,
+  deleteAssets,
+  createAssets,
+} from "../../DatabaseDummy/api";
+
 const Assets = () => {
   const [assets, setAssets] = useState([
     { nomorMeja: "A1", jumlahOrang: 6, lokasiMeja: "Indoor" },
@@ -26,19 +29,44 @@ const Assets = () => {
     setIsOpen(false);
   };
 
-  const handleAddAsset = (e) => {
-    e.preventDefault();
-    const newAsset = {
-      nomorMeja,
-      jumlahOrang: parseInt(jumlahOrang),
-      lokasiMeja,
+  useEffect(() => {
+    const loadAssets = async () => {
+      const assetsData = await fetchAssets();
+      console.log(assetsData);
+      setAssets(assetsData.data);
     };
+    console.log(assets);
+    loadAssets();
+  }, []);
+
+  const handleAddAsset = async (e) => {
+    e.preventDefault();
+
     if (isEditing) {
+      const updatedAsset = {
+        nomor_meja: selectedAsset.nomor_meja,
+        jumlah_orang: parseInt(jumlahOrang),
+        lokasiMeja,
+      };
+      await updateAssets(
+        selectedAsset.nomor_meja,
+        idToko,
+        lokasiMeja,
+        parseInt(jumlahOrang)
+      );
       setAssets(
-        assets.map((asset) => (asset === selectedAsset ? newAsset : asset))
+        assets.map((asset) =>
+          asset.nomor_meja === selectedAsset.nomor_meja ? updatedAsset : asset
+        )
       );
       setIsEditing(false);
     } else {
+      const newAsset = await createAssets(
+        nomorMeja,
+        parseInt(jumlahOrang),
+        idToko,
+        lokasiMeja
+      );
       setAssets([...assets, newAsset]);
     }
     setNomorMeja("");
@@ -51,14 +79,15 @@ const Assets = () => {
 
   const handleEditAsset = (asset) => {
     setSelectedAsset(asset);
-    setNomorMeja(asset.nomorMeja);
-    setJumlahOrang(asset.jumlahOrang);
-    setLokasiMeja(asset.lokasiMeja);
+    setNomorMeja(asset.nomor_meja);
+    setJumlahOrang(asset.jumlah_orang);
+    setLokasiMeja(asset.pilihan_tempat);
     setIsEditing(true);
     setIsOpen(true);
   };
 
-  const handleDeleteAsset = (assetToDelete) => {
+  const handleDeleteAsset = async (assetToDelete) => {
+    await deleteAssets(assetToDelete.nomor_meja, idToko);
     setAssets(assets.filter((asset) => asset !== assetToDelete));
   };
 
@@ -69,34 +98,34 @@ const Assets = () => {
         <div className="w-2/12">
           <SideBar role="admin" />
         </div>
-        <div className="w-full flex flex-col gap-10 py-8 pl-5">
+        <div className="w-full flex flex-col gap-10 py-8 pl-5 overflow-y-scroll no-scrollbar">
           <button
             onClick={handleOpenModal}
             className="bg-red rounded-xl text-white uppercase px-2 py-1 font-bold text-2xl w-1/4"
           >
             Add Assets
           </button>
-          <div className="flex flex-col gap-5 w-8/12">
+          <div className="flex flex-col gap-5 w-8/12 ">
             {assets.map((asset) => (
               <div
                 className="px-4 py-2 flex flex-row w-full border-blue border rounded-xl justify-between items-center"
-                key={asset.nomorMeja}
+                key={asset.nomor_meja}
               >
                 <div className="flex flex-row gap-10">
                   <div className="flex flex-col gap-3 ">
                     <span className="text-2xl font-bold">Nomor Meja</span>
-                    <span className="text-lg">{asset.nomorMeja}</span>
+                    <span className="text-lg">{asset.nomor_meja}</span>
                   </div>
                   <div className="flex flex-col gap-3">
                     <span className="text-2xl font-bold">Jumlah Orang</span>
                     <span className="text-lg bg-blue text-white rounded-lg p-1 w-1/2 flex items-center justify-center">
-                      {asset.jumlahOrang}
+                      {asset.jumlah_people}
                     </span>
                   </div>
                   <div className="flex flex-col gap-3">
                     <span className="text-2xl font-bold">Lokasi Meja</span>
                     <span className="text-lg border border-blue text-black rounded-lg p-1 w-3/4 flex items-center justify-center">
-                      {asset.lokasiMeja}
+                      {asset.pilihan_tempat}
                     </span>
                   </div>
                 </div>
@@ -124,7 +153,10 @@ const Assets = () => {
                   value={nomorMeja}
                   placeholder="input nomor meja"
                   onChange={(e) => setNomorMeja(e.target.value)}
-                  className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
+                  className={`p-2 ${
+                    isEditing ? "disabled" : "active"
+                  } bg-grey rounded-xl text-2xl focus:outline-none`}
+                  required
                 ></input>
               </div>
 
@@ -136,6 +168,7 @@ const Assets = () => {
                   placeholder="input jumlah orang"
                   onChange={(e) => setJumlahOrang(e.target.value)}
                   className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
+                  required
                 ></input>
               </div>
               <div className="flex flex-col">
@@ -147,6 +180,7 @@ const Assets = () => {
                     placeholder="pilih lokasi meja"
                     onChange={(e) => setLokasiMeja(e.target.value)}
                     className="w-full p-3 pointer-events-auto rounded-xl bg-grey text-2xl focus:outline-none"
+                    required
                   >
                     <option value={"Indoor"}>indoor</option>
                     <option value={"Outdoor"}>Outdoor</option>
