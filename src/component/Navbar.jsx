@@ -1,12 +1,28 @@
 import { NavLink } from "react-router-dom";
 import { MdOutlineArrowBack, MdOutlineMenu } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalLayout from "./ModalLayout";
+import { fetchUser } from "../DatabaseDummy/api";
 
 const Navbar = ({ to, isHomepage }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modal, setModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [phone, setPhone] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchUser();
+        if (data) {
+          setUsers(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  });
 
   const handleIsOpen = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
@@ -23,9 +39,11 @@ const Navbar = ({ to, isHomepage }) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    setIsLogin(true);
-    alert("you are logged in");
-    setModal(false);
+    if (phone) {
+      const userPhoneNumber = users.find((user) => user.no_telpon == phone);
+      localStorage.setItem("savedPhoneNumber", userPhoneNumber);
+    } else { alert("User not found")}
+    }
   };
 
   const handleLogout = () => {
@@ -87,6 +105,7 @@ const Navbar = ({ to, isHomepage }) => {
                 <span className="text-2xl ml-2">Phone Number</span>
                 <input
                   type="tel"
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder="input your phone number"
                   className="p-2 bg-grey rounded-xl text-2xl focus:outline-none"
                 ></input>
